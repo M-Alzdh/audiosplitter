@@ -4,10 +4,10 @@ from mutagen.mp3 import MP3
 import math
 import re
 
-# where the input is and where the output will be created
-input_path = input("wher is the file (escape backslashes)\n")
-#input_path = r"c:\Users\Haji\Documents\audiosplitter\jafar.mp3"
-output_path = input("where should the new file go (escape backslashes) \n")
+# where the input is, where the output will be created, how long should each new file be
+input_path = input("wher is the file (include file name an extension, escape backslashes)\n")
+output_path = input("where should the new file go (new named infered, escape backslashes) \n")
+chunks_second = int(input("How long should each new file be (in seconds) \n"))
 
 # extracting the name of the file
 slashes = re.findall(r"[^\\]*$", input_path)[0]
@@ -21,7 +21,6 @@ mp3_file = MP3(input_path)
 length_seconds = math.floor(mp3_file.info.length)
 
 # creating the cutoff points. "chunck_second" is the length of each output file in seconds
-chunks_second = 60
 time_steps = range(0, length_seconds, chunks_second)
 cutoffs = []
 for i in time_steps:
