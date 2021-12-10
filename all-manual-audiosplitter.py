@@ -1,12 +1,11 @@
 # importing modules
-from enum import auto
 from pydub import AudioSegment
 from mutagen.mp3 import MP3
 import math
 import re
 from profilehooks import profile, timecall
 
-@timecall
+
 def audiosplitter():
     # where the input is, where the output will be created, how long should each new file be
     print("START")
@@ -40,8 +39,8 @@ def audiosplitter():
 
     # generating the final output
     for cutoff, name in zip(cutoffs, names):
-        segment = AudioSegment.from_file(input_path, 
-        format = "mp3", start_second= cutoff, duration=chunks_second)
+        segment = AudioSegment.from_file(input_path,
+        start_second= cutoff, duration=chunks_second)
         with open(f"{output_base}-{name}.mp3", "wb") as f:
             segment.export(f, format = "mp3")
     
